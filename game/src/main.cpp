@@ -26,6 +26,14 @@ struct Cell
     int col;
 };
 
+// Create an Enemy structure that stores all relevant information to define an enemy
+struct Enemy
+{
+    Cell cell;
+    float health;
+    bool destroy;
+};
+
 constexpr std::array<Cell, 4> DIRECTIONS{ Cell{ -1, 0 }, Cell{ 1, 0 }, Cell{ 0, -1 }, Cell{ 0, 1 } };
 
 inline bool InBounds(Cell cell, int rows = TILE_COUNT, int cols = TILE_COUNT)
@@ -125,6 +133,10 @@ int main()
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }  // 19
     };
     std::vector<Cell> waypoints = FloodFill({ 0, 12 }, tiles, WAYPOINT);
+
+    // Create a vector of enemies.
+    std::vector<Enemy> enemies;
+
     int curr = 0;
     int next = curr + 1;
     

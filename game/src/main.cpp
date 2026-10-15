@@ -34,6 +34,13 @@ struct Enemy
     bool destroy;
 };
 
+// Create a Turret structure that stores all relevant information to define a turret
+struct Turret
+{
+    Cell cell;
+    Enemy * target;
+};
+
 constexpr std::array<Cell, 4> DIRECTIONS{ Cell{ -1, 0 }, Cell{ 1, 0 }, Cell{ 0, -1 }, Cell{ 0, 1 } };
 
 inline bool InBounds(Cell cell, int rows = TILE_COUNT, int cols = TILE_COUNT)
@@ -134,8 +141,11 @@ int main()
     };
     std::vector<Cell> waypoints = FloodFill({ 0, 12 }, tiles, WAYPOINT);
 
-    // Create a vector of enemies.
+    // Create a vector of enemies
     std::vector<Enemy> enemies;
+
+    // Create a vector of turrets
+    std::vector<Turret> turrets;
 
     int curr = 0;
     int next = curr + 1;
